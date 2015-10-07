@@ -8,7 +8,7 @@ int validate_string(const char *);
 
 /* returns a string containing the next field in a string, then advances
  *  the pointer to the start of the subsequent field */
-char * next_field(char **): 
+char * next_field(char **);
 
 /* return the number of fields in the string */
 int field_count(const char *);
