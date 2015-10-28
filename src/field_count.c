@@ -1,4 +1,4 @@
-int feild_count(const char *str) {
+int field_count(const char *str) {
 	int count = 0;
 	
 	while(str[i] != "/0") {
