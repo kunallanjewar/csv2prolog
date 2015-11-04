@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include <stdlib.h>
 
 int main () {
   // 1. Parse command-line arguments, open input file
@@ -20,7 +21,12 @@ if (out_file == NULL) {
   exit(1);
 }
   // 2. Read file line-by-line, convert to Prolog facts
-
+printf("Prolog format output of %s file are :\n", file_name);
+   while( ( ch = fgetc(input_file) ) != EOF )
+      printf("%c",ch);
+  
+  /* close the file */
+  fclose(input_file);
   // 3. Verify Prolog format, write to output file
   return 0;
 }
