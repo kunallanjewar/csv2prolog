@@ -29,11 +29,51 @@ int main () {
     exit(1);
   }
   printf("Prolog format output of %s file are :\n", outFilename);
-  while( ( ch = fgetc(input_file) ) != EOF )
-     printf("%c",ch);
+   //control variables for while loop and char swap/insert
+  int commaCount = 0;
+  char par = ')';
+  char period = '.';
+  int commasPerLine = 0;
   
-  // 3. Verify Prolog format, write to output file
- 
+  //loop print out format and writes to file
+  while( ( ch = fgetc(input_file) ) != EOF ){
+		
+		
+		//test for first comma, its understood file supplied is line by line and has been confirmed
+		if (ch == ',' && commaCount == 0 ){
+			ch = '(';
+			commaCount++;
+		}
+		//counts to keep track of commas in a line
+		else{
+			if(ch == ',' && commaCount > 0)
+				commaCount++;
+		}
+							
+		//information on what file will look like
+		if(ch == '\r'){
+			printf("%c",par);
+			printf("%c",period);
+		}
+		printf("%c",ch);
+		
+		//writing the new prolog file
+		if(ch == '\r'){
+			fputc(par, out_file);
+			fputc(period, out_file);
+			//resets for comma control, placing first paran
+			commaCount = 0;
+		}
+		fputc(ch, out_file);
+		
+		
+  }
+  //finishes the last display character since it is not read
+  printf("%c",par);
+  printf("%c", period);
+  //writes the last character since it is not read
+  fputc(par, out_file);
+  fputc(period, out_file);
 
   /* close the file */
   fclose(input_file);
