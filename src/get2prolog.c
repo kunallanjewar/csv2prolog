@@ -71,3 +71,4 @@ int main () {
   fclose(input_file);
   fclose(out_file);
   return 0;
+}
