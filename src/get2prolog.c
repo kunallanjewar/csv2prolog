@@ -39,8 +39,8 @@ int main () {
   char par = ')';
   char period = '.';
   char * paranPeriod = ").";
-  int control = '\n';
-  char * found;
+  char control = '\n';
+  int carReturn = '\r';
   
   //beginning of the work in a loop to go through all lines of the file
   while (fgets(byLine,sizeof(byLine),input_file) != NULL){
@@ -50,7 +50,7 @@ int main () {
 	//these create a values for each line read to be used with string copy
 	int adjustedLength = strlen(byLine) + strlen(paranPeriod);
 	int testLength = strlen(byLine);
-	int insertLocation = testLength - 2;
+	int insertLocation = testLength - 1;
 	
 	//does the work to place the first paran, may need some optimization. was also going to be used
 	//for total comma count for other purposes. works so left it this way
@@ -65,26 +65,14 @@ int main () {
 	//temp string used to store string copy of final product to be output
 	char* output = (char*)malloc(adjustedLength);
 	
-	found = strchr(byLine, control);
+	strncpy(output, byLine, insertLocation);
+	output[insertLocation] = '\0';
+	strcat(output, paranPeriod);
+	strcat(output, byLine + insertLocation);
 	
-	//essentially used this like a boolean to see if each line had a \n just to see if it worked
-	//output now works but I don't know if its system neutral
-	if (found){
-		strncpy(output, byLine, insertLocation);
-		output[insertLocation] = '\0';
-		strcat(output, paranPeriod);
-		strcat(output, byLine + insertLocation);
-		printf("%s", output);
-		fputs(output, out_file);
-	}
-	else{
-		printf("%s", byLine);
-		fputs(byLine, out_file);
-	}
-	
-	//write to screen and file, this is the original code, where all lines worked but the last
-	//printf("%s", output);
-	//fputs(output, out_file);
+	//write to screen and file
+	printf("%s", output);
+	fputs(output, out_file);
 	
 	//reset comma count for next line to make first paran
 	commaCount = 0;
@@ -92,10 +80,10 @@ int main () {
 	free(output);
   }
   //covers end of file to add the paran and period
-  printf("%c",par);
-  printf("%c", period);
-  fputc(par, out_file);
-  fputc(period, out_file);
+  //printf("%c",par);
+  //printf("%c", period);
+  //fputc(par, out_file);
+  //fputc(period, out_file);
 
   /* close the file */
   fclose(input_file);
