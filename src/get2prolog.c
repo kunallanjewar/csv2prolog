@@ -11,7 +11,7 @@ int main () {
   // 1. Parse command-line arguments, open input file
   FILE *input_file, *out_file;
   const char *mode = "r";
-  char outFilename[] = "output.csv";
+  char outFilename[] = "output.pl";
   char ch;
   
   input_file = fopen("input.csv", mode);
@@ -25,7 +25,7 @@ int main () {
   out_file = fopen(outFilename, "w");
   
   if (out_file == NULL) {
-    fprintf(stderr, "Can't open output file, output.csv %s!\n", outFilename);
+    fprintf(stderr, "Can't open output file, output.pl %s!\n", outFilename);
     exit(1);
   }
   printf("Prolog format output of %s file are :\n", outFilename);
