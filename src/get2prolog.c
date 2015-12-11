@@ -38,7 +38,7 @@ int main () {
   int commaCount = 0;
   char par = ')';
   char period = '.';
-  char * paranPeriod = ").";
+  char paranPeriod[3] = ").";
   char control = '\n';
   int carReturn = '\r';
   
